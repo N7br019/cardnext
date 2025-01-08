@@ -1,14 +1,38 @@
-import React from 'react'
 import stylenav from '@/components/MyNav.module.scss'
 import Link from 'next/link'
 
+interface enemies{
+  name: string
+}
 const MyNav = () => {
+
+  const enemiesArray: enemies[] = [
+
+    {name:"Black Alien Scum"},
+    {name:"Death Smokie"},
+    {name:"Ping Pang"}   
+
+  ];
+
   return (
         <nav id={stylenav.menuContainer}>
             <ul>
-                <li><Link href="/enemies">Black Alien Scum</Link></li>
-                <li>to</li>
-                <li>tre</li>
+              {
+              enemiesArray.map((item:enemies, index:number) => (
+                <li key={index}>
+                  <Link
+                    href={{
+                      pathname: '/enemies',
+                      query: {id:index},
+                    }}
+                    
+                  >
+                   {item.name}    
+                  </Link>
+                </li>
+              ))
+            }
+                
             </ul>
         </nav>
   )
